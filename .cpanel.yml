@@ -2,4 +2,4 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/kosituto/public_html/sms_pwa/
-    - /bin/cp -R sms_pwa $DEPLOYPATH
+    - /bin/cp -R * $DEPLOYPATH
