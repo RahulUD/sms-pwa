@@ -2,4 +2,4 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/kosituto/public_html/
-    - /bin/dist/cp -R * $DEPLOYPATH
+    - /bin/cp -R dist/* $DEPLOYPATH
