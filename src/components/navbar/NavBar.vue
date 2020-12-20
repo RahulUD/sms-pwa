@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-navbar toggleable="lg" class="color" type="dark" variant="info">
-      <b-navbar-brand :to="Home" class="offset-1">
+      <b-navbar-brand to="#" class="offset-1">
         <img
           height="30"
           width="30"

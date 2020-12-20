@@ -1,6 +1,7 @@
 <template>
   <div>
     <b-modal
+      no-close-on-backdrop
       centered
       hide-header
       hide-footer
@@ -22,14 +23,17 @@
 
         <div class="form-label-group">
           <input
-            type="email"
+            type="text"
             id="inputEmail"
             class="form-control"
             placeholder="Email address"
-            required
+            v-model="form.email"
             autofocus
           />
           <label for="inputEmail">{{ text.EMAIL_LEVEL }}</label>
+          <p class="error-message" v-if="hasError">
+            {{ errorMessage.email }}
+          </p>
         </div>
 
         <div class="form-label-group">
@@ -38,9 +42,12 @@
             id="inputPassword"
             class="form-control"
             placeholder="Password"
-            required
+            v-model="form.password"
           />
           <label for="inputPassword">{{ text.PASSWORD_LEVEL }}</label>
+          <p class="error-message" v-if="hasError">
+            {{ errorMessage.password }}
+          </p>
         </div>
 
         <div class="checkbox mb-3">
@@ -51,12 +58,12 @@
         </div>
         <div class="row">
           <div class="col-6">
-            <button class="btn btn-primary btn-block" type="submit">
+            <button class="btn btn-primary btn-block" @click="submitHandle">
               {{ text.SIGN_IN }}
             </button>
           </div>
           <div class="col-6">
-            <button class="btn btn-danger btn-block" type="submit">
+            <button class="btn btn-danger btn-block" @click="cancelHandle">
               {{ text.CANCEL }}
             </button>
           </div>
@@ -70,6 +77,10 @@
 </template>
 
 <script>
+import { resetFormData, getErrorMessage } from '@/utility/CommonFormMethod'
+import { required, email, minLength, alphaNum } from 'vuelidate/lib/validators'
+// const alpha = helpers.regex('alpha', /^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&? "]).*$/)
+
 import {
   CANCEL,
   REGISTER_HERE,
@@ -82,6 +93,13 @@ import {
 export default {
   data() {
     return {
+      form: {
+        email: '',
+        password: '',
+        device_name: ''
+      },
+      errorMessage: null,
+      hasError: false,
       text: {
         CANCEL: CANCEL,
         REGISTER_HERE: REGISTER_HERE,
@@ -92,10 +110,42 @@ export default {
         REMEMBER_ME_LEVEL: REMEMBER_ME_LEVEL
       }
     }
+  },
+  validations: {
+    form: {
+      email: {
+        required,
+        email
+      },
+      password: {
+        required,
+        minLength: minLength(8),
+        alphaNum
+      }
+    }
+  },
+  methods: {
+    cancelHandle() {
+      this.form = resetFormData(this.form)
+      this.errorMessage = resetFormData(this.errorMessage)
+      this.$bvModal.hide('login-model')
+    },
+    validationHandle() {
+      if (this.$v.$invalid) {
+        this.hasError = true
+        this.errorMessage = getErrorMessage(this.$v)
+      }
+    },
+    submitHandle() {
+      this.validationHandle()
+    }
   }
 }
 </script>
 <style scoped>
+.error-message {
+  color: red;
+}
 .form-signin {
   width: 100%;
   max-width: 420px;
