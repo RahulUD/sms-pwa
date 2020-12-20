@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.d231034c562b12c269d9117504d893f9.js"
+  "/precache-manifest.b3e8188e47a959c25ee6ecbf775efc24.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "sms_fe"});
