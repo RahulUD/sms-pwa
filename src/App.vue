@@ -1,12 +1,18 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <NavBar></NavBar>
     <router-view />
   </div>
 </template>
+
+<script>
+import NavBar from '@/components/navbar/NavBar.vue'
+export default {
+  components: {
+    NavBar
+  }
+}
+</script>
 
 <style lang="stylus">
 #app
@@ -15,5 +21,4 @@
   -moz-osx-font-smoothing grayscale
   text-align center
   color #2c3e50
-  margin-top 60px
 </style>
