@@ -9,7 +9,7 @@
       class="background-color"
       id="login-model"
     >
-      <form class="form-signin">
+      <form class="form-signin" @submit.prevent>
         <div class="text-center mb-4">
           <img
             class="mb-4"
@@ -126,8 +126,12 @@ export default {
   },
   methods: {
     cancelHandle() {
-      this.form = resetFormData(this.form)
-      this.errorMessage = resetFormData(this.errorMessage)
+      if (this.form) {
+        this.form = resetFormData(this.form)
+      }
+      if (this.errorMessage) {
+        this.errorMessage = resetFormData(this.errorMessage)
+      }
       this.$bvModal.hide('login-model')
     },
     validationHandle() {
@@ -136,7 +140,7 @@ export default {
         this.errorMessage = getErrorMessage(this.$v)
       }
     },
-    submitHandle() {
+    submitHandle(event) {
       this.validationHandle()
     }
   }

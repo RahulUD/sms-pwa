@@ -1,7 +1,12 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" class="color" type="dark" variant="info">
-      <b-navbar-brand to="#" class="offset-1">
+    <b-navbar
+      toggleable="lg"
+      class="color fixed-top"
+      type="dark"
+      variant="info"
+    >
+      <b-navbar-brand to="/" class="offset-1">
         <img
           height="30"
           width="30"
@@ -16,11 +21,11 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item href="#">Link</b-nav-item>
+          <b-nav-item to="/kms/dashboard">Link</b-nav-item>
           <b-nav-item href="#" disabled>Disabled</b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto mr-4">
-          <b-nav-item right>
+          <b-nav-item right to="/kms/tutor/registration">
             {{ text.REGISTER }}
           </b-nav-item>
           <b-nav-item v-b-modal.login-model>
@@ -58,6 +63,10 @@ export default {
 }
 </script>
 <style scoped>
+.fixed-top {
+  position: fixed;
+  width: 100%;
+}
 .color {
   background-color: #40739e !important;
 }

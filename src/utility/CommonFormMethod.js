@@ -27,10 +27,10 @@ export const getErrorMessage = payload => {
               if (!payload[element][element1][element2]) {
                 switch (element2) {
                   case 'required':
-                    errors[element1] = `Required`
+                    errors[element1] = `${element1} Required`
                     break
                   case 'email':
-                    errors[element1] = `Ivalid email`
+                    errors[element1] = `Ivalid ${element1}`
                     break
                   case 'alphaNum':
                     errors[element1] = `Alpha-numaric ${element1} is Required`
